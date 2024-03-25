@@ -9,7 +9,7 @@ public class Exercise1 {
 
     //Method to find the highest int in the array
     public static int findHighestInt(int[] arrayNumbers) {
-        int maxInt = arrayNumbers[0]; //set the first index to maxInt
+        int maxInt = arrayNumbers[0];
         for (int number : arrayNumbers) {
             if (number > maxInt) {
                 maxInt = number;
