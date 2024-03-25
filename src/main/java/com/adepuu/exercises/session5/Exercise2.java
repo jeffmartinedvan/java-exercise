@@ -12,17 +12,18 @@ public class Exercise2 {
      * So, Final result: 3, 4, 5, 6, 7, 1, 2
      */
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        int[] originalArray = {1, 2, 3, 4, 5, 6, 7};
         int d = 2;
         //Create a new array to hold the first d elements
-        int[] removedElements = Arrays.copyOfRange(arr, 0,d);
+        int[] removedElements = Arrays.copyOfRange(originalArray, 0,d);
         //Create a new array to hold the remaining elements
-        int[] remainingElements = Arrays.copyOfRange(arr,d,arr.length);
+        int[] remainingElements = Arrays.copyOfRange(originalArray,d,originalArray.length);
         //Concatenate the two new arrays
         int[] newArray = new int[remainingElements.length + removedElements.length];
         System.arraycopy(remainingElements,0,newArray,0,remainingElements.length);
         System.arraycopy(removedElements,0,newArray,remainingElements.length,removedElements.length);
 
+        System.out.println("Original Array: " + Arrays.toString(originalArray));
         System.out.println("New Array: " + Arrays.toString(newArray));
     }
 }
