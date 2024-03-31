@@ -1,5 +1,8 @@
 package com.adepuu.exercises.session8;
 
+import java.util.Scanner;
+import java.util.UUID;
+
 public class App {
     /**
      * Manages user registration, login, and task management for the To-Do List application.
@@ -45,5 +48,72 @@ public class App {
          Connect all the functionalities with the related menu ;)
          GL HF! ;)
         */
+        Auth userService = new Auth();
+        Menu taskService = new Menu();
+        Scanner scanner = new Scanner(System.in);
+
+        boolean loggedIn = false;
+        User currentUser = null;
+
+        while (true) {
+            if (!loggedIn) {
+                System.out.println("1. Register\n2. Login\n3. Exit");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Enter username:");
+                        String regUsername = scanner.nextLine();
+                        System.out.println("Enter password:");
+                        String regPassword = scanner.nextLine();
+                        userService.registerUser(regUsername, regPassword);
+                        break;
+                    case 2:
+                        System.out.println("Enter username:");
+                        String loginUsername = scanner.nextLine();
+                        System.out.println("Enter password:");
+                        String loginPassword = scanner.nextLine();
+                        currentUser = userService.login(loginUsername, loginPassword);
+                        if (currentUser != null) {
+                            loggedIn = true;
+                            System.out.println("Login successful!");
+                        } else {
+                            System.out.println("Login failed. Invalid username or password.");
+                        }
+                        break;
+                    case 3:
+                        System.exit(0);
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            } else {
+                System.out.println("1. Add Task\n2. View Tasks\n3. Delete Task\n4. Logout");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Enter task description:");
+                        String taskDescription = scanner.nextLine();
+                        taskService.addTask(taskDescription);
+                        break;
+                    case 2:
+                        taskService.viewTasks();
+                        break;
+                    case 3:
+                        System.out.println("Enter task ID to delete:");
+                        UUID taskId = UUID.fromString(scanner.nextLine());
+                        taskService.deleteTask(taskId);
+                        break;
+                    case 4:
+                        loggedIn = false;
+                        currentUser = null;
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            }
+        }
     }
 }
