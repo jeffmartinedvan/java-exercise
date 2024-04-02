@@ -1,6 +1,6 @@
 package com.adepuu.exercises.session10;
 
-public class Reading implements Category {
+abstract class Reading implements Category {
     protected int stock;
     protected int pages;
     protected int borrowed;
